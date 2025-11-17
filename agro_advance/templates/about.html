@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Agro Advance</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4fff4;
+            color: #2f4f2f;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #2e7d32;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .navbar-brand {
+            font-family: 'Merriweather', serif; /* Use a distinct font for the brand */
+            font-weight: 700;
+            color: #fff !important;
+        }
+        .nav-link {
+            color: #f5f5f5 !important;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #c8f7c5 !important;
+        }
+        .nav-link.active {
+            font-weight: 600;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            color: white;
+            text-align: center;
+            padding: 80px 20px; /* Increased padding */
+            border-bottom-left-radius: 80px;
+            border-bottom-right-radius: 80px;
+        }
+
+        .header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 3.2rem; /* Larger font size */
+            font-weight: bold;
+        }
+        .header p {
+            font-size: 1.2rem; /* Slightly larger text */
+            margin-top: 15px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 0; /* Adjusted padding */
+            text-align: center;
+        }
+
+        .section h2 {
+            color: #2e7d32;
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section h2::after { /* Simple underline effect */
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #4caf50;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Feature Cards (Applied to the 'Smart Crop Suggestion' section) */
+        .feature-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: left;
+            transition: 0.3s ease-in-out;
+            border-left: 5px solid #4caf50;
+        }
+        .feature-card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .feature-card h3 {
+            color: #2e7d32;
+            font-weight: 600;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+        .feature-card p {
+            color: #4f4f4f;
+            line-height: 1.6;
+        }
+        .icon-large {
+            font-size: 55px;
+            margin-bottom: 15px;
+            color: #4caf50;
+            display: inline-block;
+        }
+
+        /* Card for the Three-Feature Section */
+        .service-card {
+            height: 100%; /* Important for equal height in a grid row */
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: 0.3s ease-in-out;
+            padding: 20px;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .service-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #2e7d32;
+        }
+        .service-card h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #4caf50;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">🌾 Agro Advance</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/disease_detection/">Disease Detection</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/recommend/">Crop recommendation</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="header" data-aos="fade-down">
+        <h1>About Agro Advance</h1>
+        <p>Empowering a new era of agriculture through AI-driven crop health and smart, sustainable farming solutions. Join us in growing smarter, not harder. 🌿</p>
+    </div>
+
+    <div class="section pt-5 pb-5">
+        <div class="container">
+            <h2 data-aos="fade-up">Our Vision</h2>
+            <div class="row g-4">
+                <div class="col-md-6" data-aos="fade-right">
+                    <div class="feature-card text-center">
+                        <div class="icon-large">🎯</div>
+                        <h3>Our Mission</h3>
+                        <p>To provide every farmer, regardless of scale, with accessible and actionable insights to maximize their yield, minimize resource use, and sustainably secure their future harvest.</p>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <div class="feature-card text-center">
+                        <div class="icon-large">🌎</div>
+                        <h3>Our Commitment</h3>
+                        <p>We are committed to building a platform that fosters a **resilient and technology-driven agricultural ecosystem**, contributing to global food security and environmental health.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <hr class="container my-5">
+
+    <div class="section pt-5 pb-5" style="background-color: #e6fae6;">
+        <div class="container">
+            <h2 data-aos="fade-up">Explore Our Core Features</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                
+                <div class="col" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="service-card">
+                        <div class="service-icon">🌱</div>
+                        <h4>Smart Crop Suggestion</h4>
+                        <p>
+                            Analyzes soil properties (N-P-K, moisture) and local weather data to recommend the most optimal crops for your land, ensuring higher yield potential.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="service-card">
+                        <div class="service-icon">🔬</div>
+                        <h4>Instant Disease Diagnosis</h4>
+                        <p>
+                            Upload a crop leaf image to instantly detect plant diseases. Get detailed descriptions, effective remedies, and proactive steps to protect your harvest.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="service-card">
+                        <div class="service-icon">📚</div>
+                        <h4>Comprehensive Crop Library</h4>
+                        <p>
+                            Access complete information on various crops, including soil and seasonal requirements, fertilizer needs, growth duration, and expert harvesting tips.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Agro Advance | Growing Smarter Together 🌾</p>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true }); // 'once: true' makes animations run only once
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

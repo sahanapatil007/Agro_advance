@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Disease Detection History</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #e9f5ec, #d3f9d8);
+      color: #1b4332;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      background: #2d6a4f;
+      color: white;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 20px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #2d6a4f;
+      margin-bottom: 30px;
+    }
+
+    .history-card {
+      display: flex;
+      align-items: center;
+      background: #f8fff9;
+      border-left: 6px solid #2d6a4f;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: 0.3s;
+    }
+
+    .history-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    .history-card img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-right: 25px;
+    }
+
+    .history-details {
+      flex: 1;
+    }
+
+    .history-details h3 {
+      margin: 0;
+      color: #1b4332;
+      font-size: 20px;
+    }
+
+    .history-details p {
+      margin: 8px 0;
+      font-size: 15px;
+      color: #2d6a4f;
+    }
+
+    .healthy {
+      color: green;
+      font-weight: bold;
+    }
+
+    .infected {
+      color: red;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      color: #2d6a4f;
+      font-size: 14px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div><strong>AgroAdvance 🌾</strong></div>
+    <div>
+      <a href="{% url 'home' %}">🏠 Home</a>
+      <a href="{% url 'detect_disease' %}">🧪 Detect Disease</a>
+      <a href="{% url 'logout' %}">🚪 Logout</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2>🩺 Disease Detection History</h2>
+
+    {% if history %}
+      {% for record in history %}
+        <div class="history-card">
+          {% if record.image_url %}
+            <img src="{{ record.image_url }}" alt="Disease Image">
+          {% else %}
+            <img src="{% static 'images/default_crop.jpg' %}" alt="No Image">
+          {% endif %}
+
+          <div class="history-details">
+            <h3>{{ record.crop_name }} — {{ record.disease_name }}</h3>
+            {% if record.is_healthy %}
+              <p class="healthy">✅ Crop is Healthy</p>
+            {% else %}
+              <p class="infected">⚠️ Crop Infected</p>
+            {% endif %}
+            <p><strong>Description:</strong> {{ record.description }}</p>
+            <p><strong>Remedies:</strong> {{ record.remedies|default:"No remedies listed." }}</p>
+            <p><strong>Keep Crop:</strong> {{ record.keep_crop|yesno:"Yes,No" }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p style="text-align:center; color:gray;">No detection history found yet.</p>
+    {% endif %}
+  </div>
+
+  <footer>© 2025 AgroAdvance — Intelligent Agriculture Solutions</footer>
+</body>
+</html>

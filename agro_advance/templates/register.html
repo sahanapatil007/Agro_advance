@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | AgroSmart</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #d9f9e7, #f0fff4);
+            margin: 0;
+            padding: 0;
+            color: #1b4332;
+        }
+
+        nav {
+            background: #2d6a4f;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            font-size: 18px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .register-container {
+            max-width: 450px;
+            margin: 70px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 40px 35px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #1b4332;
+            margin-bottom: 25px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        input {
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+        }
+
+        input:focus {
+            border-color: #40916c;
+            outline: none;
+            box-shadow: 0 0 4px rgba(64,145,108,0.4);
+        }
+
+        button {
+            background-color: #2d6a4f;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1b4332;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        a {
+            color: #2d6a4f;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .error {
+            background: #ffe0e0;
+            color: #d00000;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🌾 Navbar -->
+    <nav>
+        <div><strong>AgroSmart 🌾</strong></div>
+        <div>
+            <a href="{% url 'home' %}">🏠 Home</a>
+            <a href="{% url 'login' %}">🔑 Login</a>
+        </div>
+    </nav>
+
+    <!-- 🌱 Register Form -->
+    <div class="register-container">
+        <h2>Create Your Account</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="error">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="text" name="phone" placeholder="Phone">
+    <input type="text" name="location" placeholder="Location">
+    <button type="submit">Register</button>
+</form>
+
+        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+    </div>
+
+    <footer style="text-align:center; padding:15px; color:#2d6a4f;">© 2025 AgroSmart — Intelligent Agriculture Solutions</footer>
+
+</body>
+</html>

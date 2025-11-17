@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation | AgroAdvance</title>
+    <style>
+        /* Global styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 120vh;
+            background: url("{% static 'images/background.png' %}") no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #9cff9c;
+            z-index: 100;
+        }
+
+        .navbar .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #9cff9c;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            gap: 25px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: #9cff9c;
+        }
+
+        /* Form container */
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            margin-top: 130px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #4caf50;
+            font-size: 26px;
+        }
+
+        /* Input styling */
+        .form-container div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4caf50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+            outline: none;
+        }
+
+        /* Submit button */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4caf50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Responsive design */
+        @media (max-width: 500px) {
+            .form-container {
+                width: 85%;
+                padding: 30px;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .navbar ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">🌾 AgroAdvance</div>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+        </ul>
+    </div>
+
+    <!-- Form -->
+    <form class="form-container" action="{% url 'recommend_crop' %}" method="POST">
+        {% csrf_token %}
+        <h2>Crop Recommendation</h2>
+
+        <div>
+            <label for="nitrogen">Nitrogen (N):</label>
+            <input type="text" name="nitrogen" id="nitrogen" required>
+        </div>
+
+        <div>
+            <label for="phosphorus">Phosphorus (P):</label>
+            <input type="text" name="phosphorus" id="phosphorus" required>
+        </div>
+
+        <div>
+            <label for="potassium">Potassium (K):</label>
+            <input type="text" name="potassium" id="potassium" required>
+        </div>
+
+        <div>
+            <label for="ph">Soil pH:</label>
+            <input type="text" name="ph" id="ph" required>
+        </div>
+
+        <div>
+            <label for="rainfall">Rainfall (mm):</label>
+            <input type="text" name="rainfall" id="rainfall" required>
+        </div>
+
+        <div>
+            <label for="temperature">Temperature (°C):</label>
+            <input type="text" name="temperature" id="temperature" required>
+        </div>
+
+        <div>
+            <label for="humidity">Humidity (%):</label>
+            <input type="text" name="humidity" id="humidity" required>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>

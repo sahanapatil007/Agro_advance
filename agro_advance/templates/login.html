@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroSmart Login</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url("{% static 'images/farm-bg.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #2d6a4f;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #2d6a4f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 95%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #40916c;
+        }
+
+        p {
+            margin-top: 10px;
+        }
+
+        a {
+            color: #2d6a4f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2>🌾 AgroSmart Login</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: red;">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don’t have an account? <a href="{% url 'register' %}">Sign up</a></p>
+    </div>
+</body>
+</html>

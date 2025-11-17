@@ -1,0 +1,308 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disease Detection | Agro Advance</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    /* Color Palette */
+    :root {
+      --deep-green: #388e3c;
+      --light-green: #66bb6a;
+      --white: #ffffff;
+      --light-tint: #f8fff8;
+      --dark-text: #2e2e2e;
+      --darker-green: #1b5e20;
+      --gray-border: #e0e0e0;
+    }
+
+    body {
+      background-color: var(--light-tint);
+      font-family: 'Poppins', sans-serif;
+      color: var(--dark-text);
+      line-height: 1.6;
+    }
+
+    /* --- Navbar --- */
+    .navbar {
+      background-color: var(--deep-green);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+      padding: 0.75rem 0;
+      transition: all 0.3s ease;
+    }
+    .navbar-brand {
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.55rem;
+      display: flex;
+      align-items: center;
+    }
+    .navbar-brand i {
+      font-size: 1.4rem;
+      margin-right: 0.5rem;
+    }
+    .nav-link {
+      color: var(--white) !important;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.5rem 1rem !important;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    .nav-link:hover {
+      color: var(--light-green) !important;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    .nav-link i {
+      font-size: 1.1rem;
+      margin-right: 0.35rem;
+    }
+
+    /* --- Page Title --- */
+    .page-title {
+      font-weight: 700;
+      color: var(--deep-green);
+      font-size: 2.2rem;
+      padding-bottom: 12px;
+      border-bottom: 3px solid var(--light-green);
+      display: inline-block;
+      letter-spacing: -0.5px;
+    }
+    .page-title i {
+      font-size: 1.8rem;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+    }
+
+    /* --- Cards --- */
+    .card {
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+      background-color: var(--white);
+      border: 1px solid var(--gray-border);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.16);
+    }
+
+    /* --- Result Section --- */
+    .result-section h3 {
+      color: var(--deep-green);
+      font-weight: 700;
+      font-size: 1.7rem;
+    }
+    .result-section h4 {
+      color: var(--darker-green);
+      font-weight: 600;
+      font-size: 1.2rem;
+      border-bottom: 1px dashed var(--gray-border);
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+    }
+    .result-detail p {
+      margin-bottom: 0.9rem;
+      font-size: 1rem;
+    }
+    .result-detail b {
+      color: var(--deep-green);
+      font-weight: 600;
+      min-width: 115px;
+      display: inline-block;
+    }
+    .result-detail i {
+      font-size: 1.15rem;
+      vertical-align: middle;
+    }
+
+    /* --- Image --- */
+    .img-fluid {
+      border: 3px solid var(--light-green);
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      max-height: 400px;
+      width: 100%;
+      object-fit: contain;
+      background-color: #fff;
+    }
+
+    /* --- Alerts --- */
+    .alert-danger {
+      background-color: #fef5f5;
+      color: #c62828;
+      border: 1px solid #ffcdd2;
+      border-radius: 12px;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(211, 47, 47, 0.1);
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+    .alert-danger i {
+      font-size: 1.2rem;
+      vertical-align: middle;
+    }
+
+    /* --- Buttons --- */
+    .btn-custom {
+      background-color: var(--light-green);
+      color: #fff;
+      border-radius: 10px;
+      padding: 11px 28px;
+      transition: all 0.3s ease;
+      border: none;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 4px 10px rgba(102, 187, 106, 0.3);
+    }
+    .btn-custom:hover {
+      background-color: var(--deep-green);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(56, 142, 60, 0.4);
+    }
+    .btn-custom:focus {
+      box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.3);
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: #fff;
+      border-radius: 10px;
+      padding: 11px 28px;
+      border: none;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
+    }
+    .btn-secondary:hover {
+      background-color: #5a6268;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(90, 98, 104, 0.4);
+    }
+
+    /* --- Form Controls --- */
+    .form-control {
+      border-radius: 10px;
+      padding: 12px 14px;
+      border: 1.5px solid #ced4da;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .form-control:focus {
+      border-color: var(--light-green);
+      box-shadow: 0 0 0 0.2rem rgba(102, 187, 106, 0.25);
+      outline: none;
+    }
+    .form-label {
+      font-weight: 600;
+      color: var(--deep-green);
+      margin-bottom: 0.6rem;
+    }
+
+    /* --- Footer --- */
+    footer {
+      background-color: #f1f8f1;
+      border-top: 1px solid #d0e8d0;
+      padding: 1.5rem 0;
+      font-size: 0.9rem;
+      margin-top: 3rem;
+    }
+    footer span {
+      color: var(--deep-green) !important;
+      font-weight: 600;
+    }
+
+    /* --- Responsive Tweaks --- */
+    @media (max-width: 576px) {
+      .page-title {
+        font-size: 1.8rem;
+      }
+      .btn-custom, .btn-secondary {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+      }
+      .card {
+        margin: 0 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="">
+        <i class="bi bi-fan"></i> Agro Advance
+      </a>
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="/home/"><i class="bi bi-house-door-fill"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/detect/"><i class="bi bi-search"></i> Detection</a></li>
+          <li class="nav-item"><a class="nav-link" href="/detect_history/"><i class="bi bi-clock-history"></i> History</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container py-5 text-center">
+    <h2 class="page-title mb-5"><i class="bi bi-tools"></i> Plant Disease Detection</h2>
+
+    {% if error %}
+      <div class="alert alert-danger mx-auto">
+        <i class="bi bi-exclamation-triangle-fill"></i> {{ error }}
+      </div>
+    {% endif %}
+
+    {% if predicted_class %}
+      <div class="card mx-auto p-4 result-section" style="max-width: 720px;">
+        <h3 class="mb-4">Detection Complete!</h3>
+        <img src="{{ image_url }}" class="img-fluid rounded mb-4" alt="Uploaded Image">
+        <h4 class="mb-3 text-start">Result Summary:</h4>
+        
+        <div class="text-start mb-3 result-detail">
+          <p><i class="bi bi-tree-fill" style="color: #388e3c;"></i> <b>Crop Identified:</b> <span class="fw-bold text-success">{{ crop }}</span></p>
+          <p><i class="bi bi-x-octagon-fill" style="color: #d32f2f;"></i> <b>Predicted Disease:</b> <span class="fw-bold">{{ predicted_class }}</span></p>
+        </div>
+
+        <div class="text-start border-top pt-3 mt-3">
+          <h5 class="fw-bold">Description</h5>
+          <p class="text-muted">{{ description }}</p>
+
+          <h5 class="fw-bold mt-4">Recommended Remedy</h5>
+          <p class="text-muted">{{ remedy }}</p>
+        </div>
+
+        <div class="d-grid gap-2 d-md-block mt-4 text-center">
+          <a href="/detect/" class="btn btn-custom mt-2"><i class="bi bi-arrow-repeat"></i> New Detection</a>
+          <a href="/" class="btn btn-secondary mt-2"><i class="bi bi-house-door-fill"></i> Back to Home</a>
+        </div>
+      </div>
+
+    {% else %}
+      <div class="card mx-auto p-5" style="max-width: 520px;">
+        <h4 class="mb-4">Upload Leaf Image</h4>
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-4 text-start">
+            <label for="leaf_image" class="form-label">Select Image File (.jpg, .png)</label>
+            <input type="file" id="leaf_image" name="leaf_image" accept="image/*" required class="form-control">
+          </div>
+          <button type="submit" class="btn btn-custom w-100"><i class="bi bi-search"></i> Detect Disease</button>
+        </form>
+      </div>
+    {% endif %}
+  </div>
+
+  <footer class="text-center text-muted">
+    © 2025 <span>Agro Advance</span> | Smart Farming Made Simple
+  </footer>
+
+</body>
+</html>

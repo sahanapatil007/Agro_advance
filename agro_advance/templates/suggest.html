@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommended Crop</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #f0fff4, #d9f9e7);
+            margin: 0;
+            padding: 0;
+            color: #1b4332;
+        }
+
+        nav {
+            background: #2d6a4f;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            font-size: 18px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 30px 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1b4332;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            color: #2d6a4f;
+        }
+
+        .crop-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .crop-info img {
+            width: 40%;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .details {
+            width: 55%;
+            padding-left: 30px;
+        }
+
+        .details p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .stage {
+            background-color: #e9f5ec;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            margin: 15px;
+        }
+
+        .stage-icon {
+            font-size: 30px;
+        }
+
+        .chart-container {
+            margin-top: 50px;
+            background: #fff;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            color: #2d6a4f;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🌿 NAVBAR -->
+    <nav>
+        <div><strong>AgroSmart 🌾</strong></div>
+        <div>
+            <a href="{% url 'home' %}">🏠 Home</a>
+            <a href="{% url 'crop' %}">🌱 New Recommendation</a>
+            <a href="#">📞 Contact</a>
+        </div>
+    </nav>
+
+    <!-- 🌾 MAIN CONTAINER -->
+    <div class="container">
+        <h1>Recommended Crop</h1>
+        <p style="text-align:center; color:#40916c;">
+            Based on your soil input, here’s the most suitable crop and its growth stages.
+        </p>
+
+        <!-- 🪴 Crop Info Section -->
+        <div class="crop-info">
+            {% if crop_info and crop_info.image_url %}
+                <img src="{{ crop_info.image_url }}" alt="{{ crop.crop_name }}">
+            {% elif crop and crop.image %}
+                <img src="{{ crop.image.url }}" alt="{{ crop.crop_name }}">
+            {% else %}
+                <img src="{% static 'images/default_crop.jpg' %}" alt="Default Crop">
+            {% endif %}
+
+            <div class="details">
+                <h2>🌾 Recommended Crop: {{ crop.crop_name }}</h2>
+                {% if crop_info %}
+                    <p><strong>Good Seeds:</strong> {{ crop_info.good_seeds }}</p>
+                    <p><strong>Fertilizer:</strong> {{ crop_info.fertilizer }}</p>
+                    <p><strong>Methods:</strong> {{ crop_info.methods }}</p>
+                    <p><strong>Time Required:</strong> {{ crop_info.time_required }}</p>
+                {% else %}
+                    <p>No additional info found for this crop.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- 🌾 Timeline Section -->
+        {% if timeline %}
+        <h3>🌱 Growth Timeline</h3>
+        <div class="timeline">
+            {% for stage in timeline %}
+                <div class="stage">
+                    <div class="stage-icon">{{ stage.icon }}</div>
+                    <h4>{{ stage.name }}</h4>
+                    <p>{{ stage.start }} → {{ stage.end }}</p>
+                    <small>{{ stage.info }}</small>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+ <!-- 🌾 Footer -->
+    <footer>© 2025 AgroSmart — Intelligent Agriculture Solutions</footer>
+
+</body>
+</html>

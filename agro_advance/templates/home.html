@@ -1,0 +1,268 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroAdvance | Smart Farming Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Color Palette & Variables --- */
+        :root {
+            --primary-green: #388e3c;     /* Deep, vibrant green for accents (Navbar Background) */
+            --secondary-green: #66bb6a;   /* Lighter green for buttons/highlights */
+            --background-light: #ffffff;  /* Pure white background for containers */
+            --text-dark: #2e2e2e;         /* Dark text for high contrast */
+            --text-gray: #555555;         /* Lighter text for paragraphs */
+            --box-shadow-light: rgba(0, 0, 0, 0.1);
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-family);
+            color: var(--text-dark);
+            min-height: 100vh;
+            /* Applying the original image */
+            background-color: #f8fff8; 
+            background-image: url('{% static "images/background.png" %}');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+            
+            position: relative;
+            z-index: 1; 
+        }
+
+        /* Pseudo-element to apply a light overlay, making the image more visible (70% opacity) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Decreased opacity from 0.85 to 0.70 to show more background image color */
+            background-color: rgba(255, 255, 255, 0.70); 
+            z-index: -1;
+        }
+
+        /* --- Navbar Styling (Made Attractive) --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            /* Change to Primary Green background for a strong, attractive header */
+            background-color: var(--primary-green);
+            border-bottom: 3px solid #2e7d32; /* Slightly darker green line */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow for depth */
+            position: sticky;
+            top: 0;
+            z-index: 100; 
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: white; /* White logo text for contrast */
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white; /* White link text on green background */
+            font-weight: 500;
+            padding: 5px 0;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary-green); /* Lighter green on hover */
+            border-bottom: 2px solid var(--secondary-green);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            padding: 100px 5%;
+            max-width: 900px;
+            margin: 80px auto 40px;
+            background-color: var(--background-light);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
+            position: relative;
+            z-index: 5;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+
+        .hero p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            color: var(--text-gray);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-green); 
+            color: white; 
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease, transform 0.2s;
+            box-shadow: 0 4px 10px var(--box-shadow-light);
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-green); 
+            transform: translateY(-2px);
+        }
+
+        /* --- Cards Section --- */
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 40px 5%;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 5;
+        }
+
+        .card {
+            background-color: var(--background-light); 
+            width: 45%;
+            min-width: 300px;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            border: 1px solid #e0e0e0; 
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(56, 142, 60, 0.2); 
+        }
+
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-top: 15px;
+            border: 3px solid var(--secondary-green); 
+        }
+
+        .card h2 {
+            margin-bottom: 15px;
+            color: var(--primary-green); 
+            font-size: 1.8em;
+        }
+
+        .card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card p {
+            color: var(--text-gray); 
+            margin-top: 15px;
+        }
+
+        /* --- Media Queries (Retained for responsiveness) --- */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 2.8em; }
+            .navbar { padding: 15px 30px; }
+            .features { gap: 30px; }
+            .card { width: 48%; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px 20px;
+            }
+            .logo { margin-bottom: 10px; }
+            nav ul { gap: 15px; }
+            .hero { padding: 80px 5%; margin-top: 40px; }
+            .hero h1 { font-size: 2.5em; }
+            .hero p { font-size: 1em; }
+            .features { flex-direction: column; align-items: center; }
+            .card { 
+                width: 90%; 
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">🌿 AgroAdvance</div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                    <li><a href="{% url 'logout' %}">Log Out</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Intelligent Farming Starts Here</h1>
+        <p>
+            Welcome to AgroAdvance — your smart assistant for sustainable agriculture. 
+            Leverage AI to discover the optimal crops for your soil composition and 
+            instantly identify plant diseases. Empowering farmers with technology 
+            for a brighter, more fruitful harvest.
+        </p>
+        <a href="{% url 'crop' %}" class="cta-button">Start Your Smart Analysis →</a>
+    </section>
+
+    <section class="features">
+        <div class="card">
+             <a href="{% url 'crop' %}"> 
+                 <h2>Crop Recommendation</h2>
+                 <img src="{% static 'images/crop.jpg' %}" alt="Field of healthy crops">
+             </a>
+             <p>
+                 Analyze your soil's NPK, pH, and climate data to get the best-suited crop suggestion for maximum yield.
+             </p>
+        </div>
+        <div class="card">
+            <a href="{% url 'detect_disease' %}"> 
+                <h2>Disease Detection</h2>
+                <img src="{% static 'images/dieases.jpg' %}" alt="Close-up of a diseased plant leaf">
+            </a>
+            <p>
+                Upload a leaf image and let our model instantly detect the disease, providing remedies and prevention steps.
+            </p>
+        </div>
+    </section>
+</body>
+</html>
