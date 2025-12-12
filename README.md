@@ -14,12 +14,4 @@ Can be expanded with more features in the future
 
 HTML, CSS, JavaScript, Python (if used), Weather/API data
 
-<h4>How to Run</h4>
 
-Clone the repository
-
-Install required libraries
-
-Run the project (ex: python app.py)
-
-Open in the browser
